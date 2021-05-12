@@ -22,6 +22,7 @@ def dynamicArray(n, queries):
         arr.append([])
         
     last_answer=0
+    last_answerx=[]
     
     for each in queries:
         if each[0]==1:
@@ -31,7 +32,9 @@ def dynamicArray(n, queries):
             idx=(each[1]^last_answer)%n
             last_answer=arr[idx][each[2]%len(arr[idx])]
             
-            return last_answer
+            last_answerx.append(last_answer)
+            
+    return last_answerx
             
             
             
