@@ -1,35 +1,20 @@
-from heapq import heappush, heappop
+# Enter your code here. Read input from STDIN. Print output to STDOUT
 
-valheap = []
-delheap = []
 
-q = int(input().strip())
+import heapq
 
-for i in range(q):
+heap=[]
+lookup=set()
 
-    lst = list(map(int, input().strip().split(' ')))
 
-    if lst[0] == 1:
-        heappush(valheap, lst[1])
-
-    elif lst[0] == 2:
-
-        if valheap[0] == lst[1]:
-            heappop(valheap)
-        else:
-            heappush(delheap, lst[1])
-
-    elif lst[0] == 3:
-
-        check = bool(delheap)
-
-        while check:
-            if delheap[0] == valheap[0]:
-                heappop(delheap)
-                heappop(valheap)
-                check = bool(delheap)
-            else:
-                check = False
-
-        print (valheap[0])
- 
+for i in range(0, int(input())):
+    sample=list(map(int,input().split(" ")))
+    if sample[0]==1:
+        heapq.heappush(heap, sample[1])
+        lookup.add(sample[1])
+    elif sample[0]==2:
+        lookup.discard(sample[1])
+    else:
+        while heap[0] not in lookup:
+            heapq.heappop(heap)
+        print(heap[0])
